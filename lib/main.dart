@@ -15,6 +15,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         textTheme: GoogleFonts.oswaldTextTheme(),
         primaryColor: const Color(0xFF820300),
+        scrollbarTheme: ScrollbarThemeData(
+          thumbColor: MaterialStateProperty.all(Colors.deepOrange),
+        ),
       ),
       home: const MyHomePage(),
     );
@@ -67,27 +70,34 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
       ),
-      body: ListView.builder(
-        itemCount: items.length,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              height: 100,
-              alignment: Alignment.center,
-              color: Colors.green,
-              child: Text(
-                items[index],
-                style: const TextStyle(
-                  fontSize: 20,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontStyle: FontStyle.normal,
+      body: Scrollbar(
+        thumbVisibility: true,
+        trackVisibility: false,
+        thickness: 10,
+        interactive: true,
+        radius: const Radius.circular(10),
+        child: ListView.builder(
+          itemCount: items.length,
+          itemBuilder: (context, index) {
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                height: 100,
+                alignment: Alignment.center,
+                color: Colors.green,
+                child: Text(
+                  items[index],
+                  style: const TextStyle(
+                    fontSize: 20,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontStyle: FontStyle.normal,
+                  ),
                 ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }
